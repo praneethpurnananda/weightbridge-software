@@ -1,0 +1,21 @@
+.main_grid{
+  margin-right: 2%;
+  margin-left: 2%;
+  margin-top: 3%;
+}
+.left{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.example-full-width-one {
+  width: 30% !important;
+  margin-bottom: 20px;
+  padding: 12px;
+}
+.btn{
+  margin-left: 1%;
+}
+.submit{
+  margin-right: 2%;
+}

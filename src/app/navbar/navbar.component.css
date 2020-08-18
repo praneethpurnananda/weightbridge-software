@@ -1,0 +1,16 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+mat-toolbar{
+  height: 53px !important;
+}
+
+.navbar span{
+  margin-right: 3%;
+}
+
+.sub_menu{
+  font-size: 15px;
+  cursor: pointer;
+}

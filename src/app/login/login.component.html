@@ -1,0 +1,29 @@
+<body class="login-page">
+  <main class="main_class">
+
+    <form [formGroup]="loginForm" class="sign-in example-form" novalidate>
+      <div class="login-block">
+        <h1 class="login_title">Weightbridge Login</h1>
+        <!--field_one-->
+        <mat-form-field class="example-full-width-one" appearance="outline">
+          <mat-label>Username</mat-label>
+          <input matInput id="name" formControlName="name"  placeholder="Username">
+        </mat-form-field>
+        <!--field two-->
+        <mat-form-field class="example-full-width-one" appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput id="password" formControlName="password" placeholder="Password">
+        </mat-form-field>
+        <!--submit button-->
+        <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" type="submit" [disabled]="!loginForm.valid" (click)="login()">Login</button>
+        <div class="links_section">
+          <span class="new_acc">
+            Forgot Password?
+          </span>
+
+          </div>
+      </div>
+    </form>
+
+  </main>
+</body>
