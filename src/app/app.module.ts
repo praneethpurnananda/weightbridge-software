@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from "@angular/common/http";
 //material design
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatInputModule} from '@angular/material/input';
@@ -20,6 +21,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { NotloadedGenerateBillComponent } from './notloaded-generate-bill/notloaded-generate-bill.component';
 import { LoadedGenerateBillComponent } from './loaded-generate-bill/loaded-generate-bill.component';
 import { HeadingsComponent } from './headings/headings.component';
+import { AdminComponent } from './admin/admin.component';
+import { AddUserComponent } from './admin/add-user/add-user.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,9 @@ import { HeadingsComponent } from './headings/headings.component';
     NavbarComponent,
     NotloadedGenerateBillComponent,
     LoadedGenerateBillComponent,
-    HeadingsComponent
+    HeadingsComponent,
+    AdminComponent,
+    AddUserComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +41,7 @@ import { HeadingsComponent } from './headings/headings.component';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     MatToolbarModule,
     MatInputModule,
     MatFormFieldModule,

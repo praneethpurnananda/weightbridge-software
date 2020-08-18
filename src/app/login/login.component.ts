@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormBuilder, FormGroup, NgForm, Validators, FormGroupDirective} from '@angular/forms';
 import { Router } from '@angular/router';
+import { ServerService } from "../server.service";
 
 @Component({
   selector: 'app-login',
@@ -9,8 +10,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-
-  constructor(private fb: FormBuilder,private router: Router) {
+  msg;
+  constructor(private fb: FormBuilder,private router: Router,private _myservice:ServerService) {
     this.loginForm = this.fb.group({
       name: ['', [Validators.required]],
       password: ['', [Validators.required]],
@@ -22,7 +23,16 @@ export class LoginComponent implements OnInit {
 
   login(){
     console.log(this.loginForm.value);
-    this.router.navigate(['/emptyvehicle']);
+    let tmp = {username: this.loginForm.value.name , password: this.loginForm.value.password};
+    // this.router.navigate(['/emptyvehicle']);
+    this._myservice.logIn(tmp)
+    .subscribe(
+      data => {
+        localStorage.setItem('token',data['token'].toString());
+        this.router.navigate(['/emptyvehicle']);
+      },
+      error => this.msg = error.error.message
+    );
   }
 
 }

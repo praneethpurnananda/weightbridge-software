@@ -1,0 +1,23 @@
+.main{
+  margin-top: 2%;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.add-user{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.example-full-width-one {
+  width: 20% !important;
+  margin-bottom: 20px;
+  padding: 12px;
+}
+
+.btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

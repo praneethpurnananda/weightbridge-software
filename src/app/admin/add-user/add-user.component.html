@@ -1,0 +1,33 @@
+<app-navbar></app-navbar>
+<div class="main">
+  <form [formGroup]="addUserForm" class="sign-in example-form" novalidate>
+    <div class="add-user">
+      <mat-form-field class="example-full-width-one" appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput id="name" formControlName="name"  placeholder="Username">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width-one" appearance="outline">
+        <mat-label>Phone number</mat-label>
+        <input matInput id="number" formControlName="mobileNumber"  placeholder="Mobile Number">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width-one" appearance="outline">
+        <mat-label>User type</mat-label>
+        <mat-select formControlName="typeOfUser">
+          <mat-option *ngFor="let type of userType" [value]="type.value">
+            {{type.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width-one" appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput id="name" formControlName="password"  placeholder="Username">
+      </mat-form-field>
+    </div>
+    <div class="btn">
+    <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" type="submit" [disabled]="!addUserForm.valid" (click)="addUser()">Add user</button>
+    </div>
+  </form>
+</div>

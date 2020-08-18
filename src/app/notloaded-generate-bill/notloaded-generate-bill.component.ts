@@ -30,6 +30,7 @@ export class NotloadedGenerateBillComponent implements OnInit {
       });
   }
 
+//nt wg  == loade wt - emt wt , tc = (nwt * itecost) *  
   ngOnInit(): void {
   }
 
