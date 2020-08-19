@@ -24,4 +24,32 @@ export class AdminserviceService {
   });
   }
 
+  addItem(body: any){
+  return this._http.post(this.backendService+'/admin/addItem', body,{
+    observe: 'body',
+    headers: new HttpHeaders().append('token' , localStorage.getItem('token'))
+  });
+  }
+
+  showItems(){
+    return this._http.get(this.backendService+'/admin/allItems',{
+      observe: 'body',
+      headers: new HttpHeaders().append('token' , localStorage.getItem('token'))
+    });
+  }
+
+  deleteItem(tmp){
+    return this._http.delete(this.backendService+'/admin/deleteItem',{
+      observe: 'body',
+      headers: new HttpHeaders().append('token' , localStorage.getItem('token')),
+      params: new HttpParams().append('id' , tmp)
+    });
+  }
+
+  edit(body: any){
+    return this._http.post(this.backendService+'/admin/editItem', body,{
+      observe: 'body',
+      headers: new HttpHeaders().append('token' , localStorage.getItem('token')),
+    });
+  }
 }

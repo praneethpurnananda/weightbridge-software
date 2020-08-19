@@ -30,14 +30,7 @@ export class AddUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._myservice.showUsers()
-    .subscribe(
-      data => {
-        this.allUsers = data['users'],
-        console.log(this.allUsers);
-      },
-      error => this.msg = error.error.message
-    );
+
   }
 
   addUser(){
@@ -50,5 +43,6 @@ export class AddUserComponent implements OnInit {
       },
       error => this.msg = error.error.message
     );
+    this.addUserForm.reset();
   }
 }

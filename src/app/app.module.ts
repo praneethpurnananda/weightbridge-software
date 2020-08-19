@@ -13,6 +13,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
+import {MatListModule} from '@angular/material/list';
+import {MatTableModule} from '@angular/material/table';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,6 +26,8 @@ import { LoadedGenerateBillComponent } from './loaded-generate-bill/loaded-gener
 import { HeadingsComponent } from './headings/headings.component';
 import { AdminComponent } from './admin/admin.component';
 import { AddUserComponent } from './admin/add-user/add-user.component';
+import { ShowUsersComponent } from './admin/show-users/show-users.component';
+import { ItemsComponent , EditItems } from './admin/items/items.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +38,10 @@ import { AddUserComponent } from './admin/add-user/add-user.component';
     LoadedGenerateBillComponent,
     HeadingsComponent,
     AdminComponent,
-    AddUserComponent
+    AddUserComponent,
+    ShowUsersComponent,
+    ItemsComponent,
+    EditItems
   ],
   imports: [
     BrowserModule,
@@ -50,7 +58,10 @@ import { AddUserComponent } from './admin/add-user/add-user.component';
     MatIconModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
+    MatListModule,
+    MatTableModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
