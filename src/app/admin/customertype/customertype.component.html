@@ -4,14 +4,18 @@
     <div class="item">
       <mat-form-field class="example-full-width-one" appearance="outline">
         <mat-label>Customer type</mat-label>
-        <input matInput id="customertype" formControlName="customertype"  placeholder="customer type">
+        <mat-select formControlName="customertype">
+          <mat-option *ngFor="let i of allCustomerTypes" [value]="i.name">
+            {{i.name}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
 
       <mat-form-field class="example-full-width-one" appearance="outline">
         <mat-label>Item type</mat-label>
         <mat-select formControlName="itemname">
-          <mat-option *ngFor="let i of item" [value]="i.value">
-            {{i.viewValue}}
+          <mat-option *ngFor="let i of allItems" [value]="i.name">
+            {{i.name}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -25,21 +29,21 @@
       <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" type="submit" [disabled]="!customerTypeForm.valid" (click)="addCustomerType()">Add Customertype</button>
       </div>
   </form>
-<!-- <br>
+<br>
   <mat-list>
   <div mat-subheader>Items</div>
-  <mat-list-item *ngFor="let item of allItems">
+  <mat-list-item *ngFor="let item of allDiscounts">
     <mat-icon mat-list-icon>category</mat-icon>
-    <div mat-line class="type">{{item.name}} <span class="amount"> &#8377; {{item.amount}}</span></div>
+    <div mat-line class="type">{{item.name}} <span class="type" style="margin-left: 15% !important;">{{item.item_type}}</span> <span class="amount">{{item.discount}} &#37;</span></div>
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="deleteItem(item)">
+        <button mat-menu-item (click)="deleteDiscount(item)">
           <mat-icon>delete</mat-icon>
           <span>Delete</span>
         </button>
-        <button mat-menu-item (click)="edit(item)">
+        <button mat-menu-item (click)="editDiscount(item)">
           <mat-icon>create</mat-icon>
           <span>Edit</span>
         </button>
@@ -47,5 +51,5 @@
 
   </mat-list-item>
   <mat-divider></mat-divider>
-</mat-list> -->
+</mat-list>
 </div>

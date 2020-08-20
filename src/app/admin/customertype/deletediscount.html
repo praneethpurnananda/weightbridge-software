@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>Edit selected discounttype</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="main">
+
+    <div class="item">
+      <mat-form-field class="example-full-width-one" appearance="outline">
+        <mat-label>Customer type</mat-label>
+        <mat-select value={{data.name}} #name>
+          <mat-option *ngFor="let i of allCustomerTypes" [value]="i.name">
+            {{i.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width-one" appearance="outline">
+        <mat-label>Item type</mat-label>
+        <mat-select value={{data.type}} #item>
+          <mat-option *ngFor="let j of allItems" [value]="j.name">
+            {{j.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <mat-form-field class="example-full-width-one" appearance="outline">
+        <mat-label>Discount</mat-label>
+        <input matInput id="name_item"   placeholder="Customer type" value={{data.discount}} #discount>
+      </mat-form-field>
+
+      </div>
+      <div class="btn">
+      <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" type="submit"  (click)="edit(name.value,item.value,discount.value,data)" [mat-dialog-close]="1">Edit customertype</button>
+      </div>
+
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-flat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>
