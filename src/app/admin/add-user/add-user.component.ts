@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Output , EventEmitter} from '@angular/core';
 import {FormControl, FormBuilder, FormGroup, NgForm, Validators, FormGroupDirective} from '@angular/forms';
 import { AdminserviceService } from "../../adminservice.service";
+
 
 interface userTypeObj {
   value: string;
@@ -12,7 +13,6 @@ interface userTypeObj {
   styleUrls: ['./add-user.component.css']
 })
 export class AddUserComponent implements OnInit {
-
   addUserForm: FormGroup;
   msg;
   allUsers;
@@ -45,4 +45,5 @@ export class AddUserComponent implements OnInit {
     );
     this.addUserForm.reset();
   }
+
 }
