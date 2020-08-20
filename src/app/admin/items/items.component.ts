@@ -47,6 +47,10 @@ export class ItemsComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      if(result === 1){
+      this.ngOnInit();
+      console.log('called');
+    }
     });
   }
 
@@ -59,7 +63,9 @@ export class ItemsComponent implements OnInit {
           },
       error => console.log(error.error.message)
     );
+
   }
+
 
 }
 
@@ -81,6 +87,8 @@ export class EditItems {
     onNoClick(): void {
     this.dialogRef.close();
   }
+
+
 
   edit(name,amount,data){
     let tmp = {newName: name, newAmount: amount , id: data.id};
