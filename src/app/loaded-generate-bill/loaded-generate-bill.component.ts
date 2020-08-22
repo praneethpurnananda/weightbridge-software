@@ -8,7 +8,7 @@ import { ServerService } from "../server.service";
 })
 
 export class LoadedGenerateBillComponent implements OnInit {
-  displayedColumns = ['Billdate', 'Ticketnumber', 'Vehiclenumber', 'Customername' , 'Customrtype' , 'Vehicleweight' , 'Createdby'];
+  displayedColumns = ['Billdate', 'Ticketnumber', 'Vehiclenumber', 'Customername' , 'Customrtype' , 'Vehicleweight' , 'Createdby' , 'action'];
   public title = "Loaded vehicle bill generation";
 
   pendingBills;
@@ -21,6 +21,10 @@ export class LoadedGenerateBillComponent implements OnInit {
       data => this.dataSource = data['allBills'],
       error => console.log(error.error.message)
     );
+  }
+
+  demoClick(item){
+    console.log(item);
   }
 
 }
