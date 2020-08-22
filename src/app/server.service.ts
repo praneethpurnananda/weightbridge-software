@@ -16,4 +16,18 @@ export class ServerService {
   });
   }
 
+  pendingBill(body: any){
+    return this._http.post(this.backendService+'/bill/emptyBill', body,{
+      observe: 'body',
+      headers: new HttpHeaders().append('token' , localStorage.getItem('token'))
+    });
+  }
+
+  getPendingBills(){
+    return this._http.get(this.backendService+'/bill/emptyBills',{
+      observe: 'body',
+      headers: new HttpHeaders().append('token' , localStorage.getItem('token'))
+    });
+  }
+
 }

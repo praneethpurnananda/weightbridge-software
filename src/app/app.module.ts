@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
+import { DatePipe } from "@angular/common";
 //material design
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatInputModule} from '@angular/material/input';
@@ -28,6 +29,8 @@ import { AdminComponent } from './admin/admin.component';
 import { AddUserComponent } from './admin/add-user/add-user.component';
 import { ShowUsersComponent } from './admin/show-users/show-users.component';
 import { ItemsComponent , EditItems } from './admin/items/items.component';
+import { CustomertypeComponent , DeletedDiscount } from './admin/customertype/customertype.component';
+import { AddcustomertypeComponent , EditCustomer } from './admin/addcustomertype/addcustomertype.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,11 @@ import { ItemsComponent , EditItems } from './admin/items/items.component';
     AddUserComponent,
     ShowUsersComponent,
     ItemsComponent,
-    EditItems
+    EditItems,
+    CustomertypeComponent,
+    DeletedDiscount,
+    AddcustomertypeComponent,
+    EditCustomer
   ],
   imports: [
     BrowserModule,
@@ -63,7 +70,7 @@ import { ItemsComponent , EditItems } from './admin/items/items.component';
     MatTableModule,
     MatDialogModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

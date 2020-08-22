@@ -34,7 +34,7 @@
   <div mat-subheader>Items</div>
   <mat-list-item *ngFor="let item of allDiscounts">
     <mat-icon mat-list-icon>category</mat-icon>
-    <div mat-line class="type">{{item.name}} <span class="type" style="margin-left: 15% !important;">{{item.item_type}}</span> <span class="amount">{{item.discount}} &#37;</span></div>
+    <div mat-line class="type">{{item.customer}} <span class="type1">{{item.item_type}}</span> <span class="amt">{{item.discount}} &#37;</span></div>
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
         <mat-icon>more_vert</mat-icon>
       </button>

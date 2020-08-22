@@ -1,0 +1,10 @@
+.type{
+  float: left;
+  margin-right: 15%;
+}
+.type1{
+  margin-left: 25%;
+}
+.amt{
+  float: right !important;
+}

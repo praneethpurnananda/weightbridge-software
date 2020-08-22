@@ -5,13 +5,17 @@ import { NotloadedGenerateBillComponent } from './notloaded-generate-bill/notloa
 import { LoadedGenerateBillComponent } from './loaded-generate-bill/loaded-generate-bill.component';
 import { AddUserComponent } from './admin/add-user/add-user.component';
 import { ItemsComponent } from './admin/items/items.component';
+import { CustomertypeComponent } from './admin/customertype/customertype.component';
+import { AddcustomertypeComponent } from './admin/addcustomertype/addcustomertype.component';
 
 const routes: Routes = [
   {path: '' , component: LoginComponent},
   {path: 'emptyvehicle' , component: NotloadedGenerateBillComponent},
   {path: 'loadedvehicle' , component: LoadedGenerateBillComponent},
   {path: 'addUser' , component: AddUserComponent},
-  {path: 'item' , component: ItemsComponent}
+  {path: 'item' , component: ItemsComponent},
+  {path: 'customertype' , component: CustomertypeComponent},
+  {path: 'addcustomertype' , component: AddcustomertypeComponent}
 ];
 
 @NgModule({

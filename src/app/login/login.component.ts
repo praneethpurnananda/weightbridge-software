@@ -11,6 +11,7 @@ import { ServerService } from "../server.service";
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   msg;
+  hide:boolean = true;
   constructor(private fb: FormBuilder,private router: Router,private _myservice:ServerService) {
     this.loginForm = this.fb.group({
       name: ['', [Validators.required]],

@@ -37,7 +37,7 @@ export class CustomertypeComponent implements OnInit {
 
     this._myservice.displayDiscount()
     .subscribe(
-      data => {this.allDiscounts = data['discounts']},
+      data => {this.allDiscounts = data['discounts'],console.log(data)},
       error => console.log(error.error.message)
     );
   }

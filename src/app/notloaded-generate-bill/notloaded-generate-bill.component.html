@@ -6,14 +6,12 @@
 
     <mat-form-field class="example-full-width-one" appearance="outline">
       <mat-label>Date</mat-label>
-      <input matInput id="name" [matDatepicker]="picker" formControlName="date"  placeholder="dd/mm/yyyy">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker touchUi #picker></mat-datepicker>
+      <input matInput id="name" formControlName="date"  placeholder="dd/mm/yyyy">
     </mat-form-field>
 
     <mat-form-field class="example-full-width-one" appearance="outline">
       <mat-label>Ticket number</mat-label>
-      <input matInput id="name" formControlName="ticketNumber"  placeholder="Ticket Number">
+      <input matInput id="name" disabled formControlName="ticketNumber">
     </mat-form-field>
 
     <mat-form-field class="example-full-width-one" appearance="outline">
@@ -29,8 +27,8 @@
     <mat-form-field class="example-full-width-one" appearance="outline">
       <mat-label>Customer type</mat-label>
       <mat-select formControlName="customerType">
-        <mat-option *ngFor="let type of customerTypeValues" [value]="type.value">
-          {{type.viewValue}}
+        <mat-option *ngFor="let type of allCustomers" [value]="type.name">
+          {{type.name}}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -40,13 +38,15 @@
       <input matInput id="name" formControlName="weight"  placeholder="Weight">
     </mat-form-field>
 
+    <!-- <div class="camera">
+        <h1>he</h1>
+    </div> -->
+
     <div class="btn">
     <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" type="submit" [disabled]="!emptyvechiclebill.valid" (click)="submitBill()">Submit bill</button>
-    <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" (click)="clearDetails()">Clear details</button>
+    <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" (click)="clearDetails()" [disabled]="true">Clear details</button>
     </div>
   </form>
 </div>
-<div class="right">
 
-</div>
 </div>

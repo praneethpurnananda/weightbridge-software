@@ -12,7 +12,10 @@
         <!--field two-->
         <mat-form-field class="example-full-width-one" appearance="outline">
           <mat-label>Password</mat-label>
-          <input matInput id="password" formControlName="password" placeholder="Password">
+          <input matInput id="password" formControlName="password" placeholder="Password" [type]="hide ? 'password':'text'" />
+          <mat-icon matSuffix (click)="hide = !hide" style="cursor: pointer;color: #092041 !important;">
+            {{hide ? 'visibility' : 'visibility_off'}}
+          </mat-icon>
         </mat-form-field>
         <!--submit button-->
         <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" type="submit" [disabled]="!loginForm.valid" (click)="login()">Login</button>
