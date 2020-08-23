@@ -7,6 +7,7 @@ import { AddUserComponent } from './admin/add-user/add-user.component';
 import { ItemsComponent } from './admin/items/items.component';
 import { CustomertypeComponent } from './admin/customertype/customertype.component';
 import { AddcustomertypeComponent } from './admin/addcustomertype/addcustomertype.component';
+import { ViewBillsComponent } from './view-bills/view-bills.component';
 
 const routes: Routes = [
   {path: '' , component: LoginComponent},
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path: 'addUser' , component: AddUserComponent},
   {path: 'item' , component: ItemsComponent},
   {path: 'customertype' , component: CustomertypeComponent},
-  {path: 'addcustomertype' , component: AddcustomertypeComponent}
+  {path: 'addcustomertype' , component: AddcustomertypeComponent},
+  {path: 'viewBills' , component: ViewBillsComponent}
 ];
 
 @NgModule({

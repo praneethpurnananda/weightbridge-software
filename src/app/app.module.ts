@@ -31,6 +31,7 @@ import { ShowUsersComponent } from './admin/show-users/show-users.component';
 import { ItemsComponent , EditItems } from './admin/items/items.component';
 import { CustomertypeComponent , DeletedDiscount } from './admin/customertype/customertype.component';
 import { AddcustomertypeComponent , EditCustomer } from './admin/addcustomertype/addcustomertype.component';
+import { ViewBillsComponent } from './view-bills/view-bills.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { AddcustomertypeComponent , EditCustomer } from './admin/addcustomertype
     CustomertypeComponent,
     DeletedDiscount,
     AddcustomertypeComponent,
-    EditCustomer
+    EditCustomer,
+    ViewBillsComponent
   ],
   imports: [
     BrowserModule,

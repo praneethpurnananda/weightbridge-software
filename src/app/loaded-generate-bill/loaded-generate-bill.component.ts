@@ -45,12 +45,6 @@ export class LoadedGenerateBillComponent implements OnInit {
       data => {this.allDiscounts = data['discounts'],console.log(data)},
       error => console.log(error.error.message)
     );
-
-    this.billservice.getAllBills()
-    .subscribe(
-      data => console.log(data),
-      error => console.log(error.error.message)
-    );
   }
 
   formFunction(item){
@@ -113,6 +107,7 @@ export class LoadedGenerateBillComponent implements OnInit {
             generated_date: new Date(),
             loaded_weight: this.loadedbill.value.weight,
             net_weight: this.finalWeight,
+            item:  this.loadedbill.value.itemname,
             amount: this.totalBill
           };
     console.log(tmp);

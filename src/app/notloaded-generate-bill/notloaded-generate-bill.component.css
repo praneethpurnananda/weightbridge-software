@@ -19,3 +19,11 @@
 .submit{
   margin-right: 2%;
 }
+.top{
+  display: flex;
+  justify-content: flex-end;
+}
+.top button{
+  margin-right: 9.2%;
+  margin-bottom: 2%;
+}

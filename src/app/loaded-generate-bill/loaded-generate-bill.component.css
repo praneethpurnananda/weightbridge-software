@@ -26,3 +26,12 @@ table {
 .generatebtns{
   margin-bottom: 3%;
 }
+
+.top{
+  display: flex;
+  justify-content: flex-end;
+  margin-left: 80%;
+}
+.top button{
+   /* margin-bottom: 2%; */
+}
