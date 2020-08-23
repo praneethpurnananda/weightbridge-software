@@ -2,6 +2,11 @@
 <app-headings [parentData]="title"></app-headings>
 <div class="show_bills">
   <div class="example-container mat-elevation-z8">
+    <!-- <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+    </mat-form-field> -->
+
   <table mat-table [dataSource]="dataSource">
 
     <!-- Position Column -->
@@ -49,11 +54,55 @@
     <!-- Symbol Column -->
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>action</th>
-      <td mat-cell *matCellDef="let element" (click)="demoClick(element)">click</td>
+      <td mat-cell *matCellDef="let element" (click)="demoClick(element)" style="cursor:pointer">click</td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </div>
+
+<div class="example-form" *ngIf="displayForm; else displayText">
+
+  <form class="example-form" [formGroup]="loadedbill" novalidate>
+
+    <mat-form-field class="example-full-width-one" appearance="outline">
+      <mat-label>Date</mat-label>
+      <input matInput id="name" formControlName="date"  placeholder="dd/mm/yyyy">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width-one" appearance="outline">
+      <mat-label>Ticket number</mat-label>
+      <input matInput id="name" disabled formControlName="ticketNumber">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width-one" appearance="outline">
+      <mat-label>Vehicle number</mat-label>
+      <input matInput id="name" formControlName="vehicleNumber"  placeholder="Vehicle Number">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width-one" appearance="outline">
+      <mat-label>Customer name</mat-label>
+      <input matInput id="name" formControlName="customerName"  placeholder="Customer Name">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width-one" appearance="outline">
+      <mat-label>Customer type</mat-label>
+      <input matInput id="name" formControlName="customerType"  placeholder="Customer Type">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width-one" appearance="outline">
+      <mat-label>Loaded vehicle weight</mat-label>
+      <input matInput id="name" formControlName="weight"  placeholder="Weight">
+    </mat-form-field>
+
+
+
+    <div class="btn">
+    <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" type="submit" [disabled]="!loadedbill.valid" (click)="submitBill()">Submit bill</button>
+    </div>
+
+  </form>
+</div>
+<ng-template #displayText> <h3>Please select any one pending bill</h3> </ng-template>
 </div>

@@ -1,5 +1,5 @@
 .example-container {
-  height: 300px;
+  height: 400px;
   overflow: auto;
 }
 
@@ -11,4 +11,8 @@ table {
   margin-right: 2%;
   margin-left: 2%;
   margin-bottom: 3%;
+}
+
+.example-form{
+  margin-top: 3%;
 }
