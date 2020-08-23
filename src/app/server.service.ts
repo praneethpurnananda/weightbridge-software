@@ -30,4 +30,19 @@ export class ServerService {
     });
   }
 
+  finaBill(body: any){
+    return this._http.post(this.backendService+'/bill/generateBill', body,{
+      observe: 'body',
+      headers: new HttpHeaders().append('token' , localStorage.getItem('token'))
+    });
+  }
+
+
+  getAllBills(){
+    return this._http.get(this.backendService+'/bill/allGeneratedBills',{
+      observe: 'body',
+      headers: new HttpHeaders().append('token' , localStorage.getItem('token'))
+    });
+  }
+
 }

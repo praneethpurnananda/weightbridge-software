@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerService } from "../server.service";
+import { AdminserviceService } from "../adminservice.service";
 import {MatTableDataSource} from '@angular/material/table';
 import {FormControl, FormBuilder, FormGroup, NgForm, Validators, FormGroupDirective} from '@angular/forms';
 
@@ -19,12 +20,35 @@ export class LoadedGenerateBillComponent implements OnInit {
   filterdata = new MatTableDataSource(this.dataSource);
   fillForm;
   displayForm:boolean = false;
-  constructor(private billservice: ServerService,private fb: FormBuilder) { }
+  allItems;
+  finalWeight;
+  allDiscounts;
+  totalBill;
+  constructor(private billservice: ServerService,private fb: FormBuilder,private _myservice: AdminserviceService) { }
 
   ngOnInit(): void {
     this.billservice.getPendingBills()
     .subscribe(
-      data => this.dataSource = data['allBills'],
+      data => {this.dataSource = data['allBills'],console.log(this.dataSource)},
+      error => console.log(error.error.message)
+    );
+
+
+    this._myservice.showItems()
+    .subscribe(
+      data => this.allItems = data['items'],
+      error => console.log(error.error.message)
+    );
+
+    this._myservice.displayDiscount()
+    .subscribe(
+      data => {this.allDiscounts = data['discounts'],console.log(data)},
+      error => console.log(error.error.message)
+    );
+
+    this.billservice.getAllBills()
+    .subscribe(
+      data => console.log(data),
       error => console.log(error.error.message)
     );
   }
@@ -37,7 +61,11 @@ export class LoadedGenerateBillComponent implements OnInit {
       vehicleNumber: [{value: item.vehicle_number , disabled: true} , Validators.required],
       customerName: [{value: item.customer_name , disabled: true} , Validators.required],
       customerType: [{value: item.customer_type , disabled: true} , Validators.required],
-      weight: ['' , Validators.required]
+      emptyweight: [{value: item.vehicle_weight , disabled: true} , Validators.required],
+      itemname: ['' , Validators.required],
+      weight: ['' , Validators.required],
+      // netweight:[{value: this.finalWeight , disabled: true} , Validators.required],
+      // cost:['' , Validators.required],
     });
   }
 
@@ -53,17 +81,51 @@ export class LoadedGenerateBillComponent implements OnInit {
     this.displayForm = true;
   }
 
-  submitBill(){
-    // let tmp = {
-    //         current_date: this.fillForm.current_date,
-    //         ticket_number: this.fillForm.ticket_number,
-    //         vehicle_number: this.fillForm.vehicle_number,
-    //         customer_name: this.fillForm.customer_name,
-    //         customer_type: this.fillForm.customer_type,
-    //         vehicle_weight: this.loadedbill.value.weight
-    //       };
-    // console.log(tmp);
-    // console.log(this.loadedbill.getRawValue().date);
+
+  generateNetWeight(){
+    let oldWeight = this.loadedbill.getRawValue().emptyweight;
+    let newWeight = this.loadedbill.value.weight;
+
+    this.finalWeight = newWeight - oldWeight;
+    console.log(this.finalWeight);
   }
+
+  generateBill(){
+    let loadType = this.loadedbill.value.itemname;
+    let customerType = this.loadedbill.getRawValue().customerType;
+
+    let itemAmt = this.allItems.find(x => x.name == loadType).amount;
+    let discount = this.allDiscounts.find(x => x.customer == customerType && x.item_type == loadType).discount;
+
+    //logs
+    console.log('fina wt'+this.finalWeight);
+    console.log('item amt'+itemAmt);
+    console.log('disc'+discount);
+
+    this.totalBill = (this.finalWeight * itemAmt);
+    this.totalBill -= ((this.totalBill) * (discount/100));
+    console.log(this.totalBill);
+  }
+
+  submitBill(){
+    let tmp = {
+            bill_id: this.fillForm.id,
+            generated_date: new Date(),
+            loaded_weight: this.loadedbill.value.weight,
+            net_weight: this.finalWeight,
+            amount: this.totalBill
+          };
+    console.log(tmp);
+    // console.log(this.loadedbill.getRawValue());
+
+    this.billservice.finaBill(tmp)
+    .subscribe(
+      data => {console.log(data),this.ngOnInit()},
+      error => console.log(error.error.message)
+    );
+  }
+
+
+
 
 }

@@ -16,3 +16,13 @@ table {
 .example-form{
   margin-top: 3%;
 }
+
+.text_one{
+  text-align: center;
+  font-size: 20px;
+  margin-top: 5%;
+}
+
+.generatebtns{
+  margin-bottom: 3%;
+}

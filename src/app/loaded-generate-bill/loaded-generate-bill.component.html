@@ -92,11 +92,41 @@
     </mat-form-field>
 
     <mat-form-field class="example-full-width-one" appearance="outline">
+      <mat-label>Empty vehicle weight</mat-label>
+      <input matInput id="name" formControlName="emptyweight"  placeholder="">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width-one" appearance="outline">
+      <mat-label>Loade item type</mat-label>
+      <mat-select formControlName="itemname">
+        <mat-option *ngFor="let i of allItems" [value]="i.name">
+          {{i.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width-one" appearance="outline">
       <mat-label>Loaded vehicle weight</mat-label>
       <input matInput id="name" formControlName="weight"  placeholder="Weight">
     </mat-form-field>
 
+    <!-- <mat-form-field class="example-full-width-one" appearance="outline">
+      <mat-label>Net weight</mat-label>
+      <input matInput id="name" formControlName="netweight"  placeholder="Click generate new weight button">
+    </mat-form-field>
 
+    <mat-form-field class="example-full-width-one" appearance="outline">
+      <mat-label>Total cost</mat-label>
+      <input matInput id="name" formControlName="cost"  placeholder="Click generate bill button">
+    </mat-form-field> -->
+
+    <br>
+    <div class="generatebtns btn">
+      <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" type="submit" (click)="generateNetWeight()">Generate net weight</button>
+      <h1 *ngIf="finalWeight">{{finalWeight}}</h1>
+      <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" type="submit" (click)="generateBill()">Generate bill</button>
+      <h1 *ngIf="totalBill">{{totalBill}}</h1>
+    </div>
 
     <div class="btn">
     <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" type="submit" [disabled]="!loadedbill.valid" (click)="submitBill()">Submit bill</button>
@@ -104,5 +134,5 @@
 
   </form>
 </div>
-<ng-template #displayText> <h3>Please select any one pending bill</h3> </ng-template>
+<ng-template #displayText> <h3 class="text_one">Please select any one pending bill</h3> </ng-template>
 </div>
