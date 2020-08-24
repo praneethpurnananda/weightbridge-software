@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
 import { DatePipe } from "@angular/common";
+import {NgxPrintModule} from 'ngx-print';
 //material design
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatInputModule} from '@angular/material/input';
@@ -70,7 +71,8 @@ import { ViewBillsComponent } from './view-bills/view-bills.component';
     MatSelectModule,
     MatListModule,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    NgxPrintModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

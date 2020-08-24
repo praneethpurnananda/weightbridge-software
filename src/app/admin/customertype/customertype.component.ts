@@ -57,6 +57,7 @@ export class CustomertypeComponent implements OnInit {
   }
 
   deleteDiscount(item){
+    console.log(item._id);
     this._myservice.deleteDiscount(item._id)
     .subscribe(
       data => {
