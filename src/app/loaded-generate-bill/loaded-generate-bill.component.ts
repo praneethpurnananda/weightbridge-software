@@ -112,6 +112,11 @@ export class LoadedGenerateBillComponent implements OnInit {
     console.log(this.totalBill);
   }
 
+  async generateWeightAndBill(){
+    await this.generateNetWeight();
+    await this.generateBill();
+  }
+
   submitBill(){
     let tmp = {
             bill_id: this.fillForm.id,

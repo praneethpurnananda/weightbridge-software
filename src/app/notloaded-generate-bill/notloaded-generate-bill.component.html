@@ -14,7 +14,7 @@
 
     <mat-form-field class="example-full-width-one" appearance="outline">
       <mat-label>Vehicle number</mat-label>
-      <input matInput id="name" formControlName="vehicleNumber"  placeholder="Vehicle Number">
+      <input matInput id="name" formControlName="vehicleNumber"  placeholder="Vehicle Number" oninput="this.value = this.value.toUpperCase()">
     </mat-form-field>
 
     <mat-form-field class="example-full-width-one" appearance="outline">

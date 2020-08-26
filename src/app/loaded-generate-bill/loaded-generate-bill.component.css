@@ -35,3 +35,13 @@ table {
 .top button{
    /* margin-bottom: 2%; */
 }
+.bill-box{
+  margin-top: 1.5%;
+  margin-bottom: 1.5%;
+  height: 30vh;
+  width: 45vh;
+  background-color: #dfcdcd;
+}
+.bill-box h1{
+  margin-bottom: 1%
+}

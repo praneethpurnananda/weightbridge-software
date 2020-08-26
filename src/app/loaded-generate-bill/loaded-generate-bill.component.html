@@ -5,10 +5,6 @@
 </div>
 <div class="show_bills">
   <div class="example-container mat-elevation-z8">
-    <!-- <mat-form-field>
-      <mat-label>Filter</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
-    </mat-form-field> -->
 
   <table mat-table [dataSource]="dataSource">
 
@@ -125,10 +121,17 @@
 
     <br>
     <div class="generatebtns btn">
-      <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" type="submit" (click)="generateNetWeight()">Generate net weight</button>
+      <!-- <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" type="submit" (click)="generateNetWeight()">Generate net weight</button>
       <h1 *ngIf="finalWeight">{{finalWeight}}</h1>
       <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" type="submit" (click)="generateBill()">Generate bill</button>
-      <h1 *ngIf="totalBill">{{totalBill}}</h1>
+      <h1 *ngIf="totalBill">{{totalBill}}</h1> -->
+      <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" type="submit" [disabled]="!loadedbill.valid" (click)="generateWeightAndBill()">Generate weight & bill</button>
+
+      <div class="bill-box">
+        <h1 *ngIf="finalWeight">Net weight : {{finalWeight}}</h1>
+        <h1 *ngIf="totalBill">Total bill : {{totalBill}}</h1>
+      </div>
+
     </div>
 
     <div class="btn">

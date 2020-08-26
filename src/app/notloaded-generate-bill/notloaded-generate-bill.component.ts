@@ -106,9 +106,9 @@ export class NotloadedGenerateBillComponent implements OnInit {
 
 //nt wg  == loade wt - emt wt , tc = (nwt * itecost) *
   ngOnInit(): void {
-    // this.startCameraOne();
-    // this.startCameraTwo();
-    // this.startCameraThree();
+    this.startCameraOne();
+    this.startCameraTwo();
+    this.startCameraThree();
     let date: Date = new Date();
     this.currDate = this.datepipe.transform(date, 'dd/MM/yyyy');
 
