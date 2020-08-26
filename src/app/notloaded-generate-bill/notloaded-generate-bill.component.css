@@ -44,3 +44,26 @@
 .cam_btn{
   text-align: center;
 }
+
+/* printing css */
+.print_main{
+  margin-left: 1%;
+  margin-top: 1%;
+  margin-right: 1%;
+}
+
+.print_header{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.print_Details{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.print_by{
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}

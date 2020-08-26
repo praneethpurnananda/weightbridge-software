@@ -89,7 +89,18 @@ export class LoadedGenerateBillComponent implements OnInit {
     let customerType = this.loadedbill.getRawValue().customerType;
 
     let itemAmt = this.allItems.find(x => x.name == loadType).amount;
-    let discount = this.allDiscounts.find(x => x.customer == customerType && x.item_type == loadType).discount;
+    let discount;
+    if(customerType.toLowerCase() === 'none'){
+      discount = 0;
+    }
+    else{
+        if(this.allDiscounts.find(x => x.item_type == loadType) == null || this.allDiscounts.find(x => x.customer == customerType) == null){
+          discount = 0;
+        }
+        else{
+        discount = this.allDiscounts.find(x => x.customer == customerType && x.item_type == loadType).discount;
+      }
+    }
 
     //logs
     console.log('fina wt'+this.finalWeight);

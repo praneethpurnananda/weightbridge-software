@@ -1,9 +1,9 @@
-import { Component, OnInit , ElementRef , Renderer2 , ViewChild } from '@angular/core';
+import { Component, OnInit , ElementRef , Renderer2 , ViewChild , Inject} from '@angular/core';
 import {FormControl, FormBuilder, FormGroup, NgForm, Validators, FormGroupDirective} from '@angular/forms';
 import { DatePipe } from "@angular/common";
 import { AdminserviceService } from "../adminservice.service";
 import { ServerService } from "../server.service";
-
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 // interface customerType {
 //   value: string;
 //   viewValue: string;
@@ -33,10 +33,9 @@ export class NotloadedGenerateBillComponent implements OnInit {
   allCustomers;
   // let date: Date = new Date();
   // console.log(date);
-  constructor(private fb: FormBuilder,public datepipe: DatePipe,private _myservice:AdminserviceService,private billservice: ServerService,private renderer: Renderer2) {
+  constructor(private fb: FormBuilder,public datepipe: DatePipe,private _myservice:AdminserviceService,private billservice: ServerService,private renderer: Renderer2,public dialog: MatDialog) {
       this.emptyvechiclebill = this.fb.group({
         date: [{value: this.datepipe.transform(new Date(), 'dd/MM/yyyy') , disabled: true} , Validators.required],
-        ticketNumber: [{value: this.demo() , disabled: true} , Validators.required],
         vehicleNumber: ['' , Validators.required],
         customerName: ['' , Validators.required],
         customerType: ['' , Validators.required],
@@ -107,9 +106,9 @@ export class NotloadedGenerateBillComponent implements OnInit {
 
 //nt wg  == loade wt - emt wt , tc = (nwt * itecost) *
   ngOnInit(): void {
-    this.startCameraOne();
-    this.startCameraTwo();
-    this.startCameraThree();
+    // this.startCameraOne();
+    // this.startCameraTwo();
+    // this.startCameraThree();
     let date: Date = new Date();
     this.currDate = this.datepipe.transform(date, 'dd/MM/yyyy');
 
@@ -120,16 +119,31 @@ export class NotloadedGenerateBillComponent implements OnInit {
     );
   }
 
-  demo(){
-    return '2';
+
+  //POPUPFUNCTION
+  openPopUp(data){
+    const dialogRef = this.dialog.open(PrintEmptyBill, {
+      width:'900px',
+      data: {
+          bill_by: data.created_by,
+          bill_date: data.current_date,
+          customer_name: data.customer_name,
+          customer_type: data.customer_type,
+          ticket_number: data.ticket_number,
+          vehicle_number: data.vehicle_number,
+          vehicle_weight: data.vehicle_weight
+          },
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
-  submitBill(){
+  submitBill(fData: any,formDirective: FormGroupDirective){
     // console.log(this.emptyvechiclebill.value);
     // let d = this.datepipe.transform(new Date(), 'dd/MM/yyyy');
     let tmp = {
       current_date: new Date(),
-      ticket_number: this.demo(),
       vehicle_number: this.emptyvechiclebill.value.vehicleNumber,
       customer_name: this.emptyvechiclebill.value.customerName,
       customer_type: this.emptyvechiclebill.value.customerType,
@@ -140,7 +154,12 @@ export class NotloadedGenerateBillComponent implements OnInit {
     .subscribe(
       data => {
             console.log(data),
-            this.emptyvechiclebill.reset()
+            formDirective.resetForm();
+            this.emptyvechiclebill.reset();
+            this.emptyvechiclebill.reset({
+              date:  this.datepipe.transform(new Date(), 'dd/MM/yyyy')
+            });
+            this.openPopUp(data['doc']);
             },
       error => console.log(error.error.message)
     );
@@ -148,4 +167,27 @@ export class NotloadedGenerateBillComponent implements OnInit {
   clearDetails(){
     this.emptyvechiclebill.reset();
   }
+}
+
+
+
+//model box typescript file starts
+
+@Component({
+  selector: 'printemptybill',
+  templateUrl: 'printemptybill.html',
+  styleUrls: ['./notloaded-generate-bill.component.css']
+})
+export class PrintEmptyBill {
+
+  constructor(
+    public dialogRef: MatDialogRef<PrintEmptyBill>,
+    @Inject(MAT_DIALOG_DATA) public data) {
+      console.log(data);
+    }
+    onNoClick(): void {
+    this.dialogRef.close();
+  }
+  printTitle = 'demo';
+
 }

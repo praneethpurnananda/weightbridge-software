@@ -18,7 +18,7 @@ export class ViewBillsComponent implements OnInit {
   ngOnInit(): void {
     this.billservice.getAllBills()
     .subscribe(
-      data => {this.dataSource = new MatTableDataSource(data['allBills']),console.log(this.dataSource)},
+      data => {this.dataSource = new MatTableDataSource(data['allBills']),console.log(data['allBills'])},
       error => console.log(error.error.message)
     );
   }

@@ -18,12 +18,13 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatListModule} from '@angular/material/list';
 import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { NotloadedGenerateBillComponent } from './notloaded-generate-bill/notloaded-generate-bill.component';
+import { NotloadedGenerateBillComponent , PrintEmptyBill } from './notloaded-generate-bill/notloaded-generate-bill.component';
 import { LoadedGenerateBillComponent } from './loaded-generate-bill/loaded-generate-bill.component';
 import { HeadingsComponent } from './headings/headings.component';
 import { AdminComponent } from './admin/admin.component';
@@ -51,7 +52,8 @@ import { ViewBillsComponent } from './view-bills/view-bills.component';
     DeletedDiscount,
     AddcustomertypeComponent,
     EditCustomer,
-    ViewBillsComponent
+    ViewBillsComponent,
+    PrintEmptyBill
   ],
   imports: [
     BrowserModule,
@@ -72,7 +74,8 @@ import { ViewBillsComponent } from './view-bills/view-bills.component';
     MatListModule,
     MatTableModule,
     MatDialogModule,
-    NgxPrintModule
+    NgxPrintModule,
+    MatBottomSheetModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
