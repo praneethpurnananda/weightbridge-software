@@ -23,8 +23,10 @@ export class NotloadedGenerateBillComponent implements OnInit {
   //web cam
   public showWebcam = false;
 
-  private trigger: Subject<void> = new Subject<void>();
-
+  public webcamImage1: WebcamImage = null;
+  public webcamImage2: WebcamImage = null;
+  private trigger1: Subject<void> = new Subject<void>();
+  private trigger2: Subject<void> = new Subject<void>();
   public videoOptions: MediaTrackConstraints = {
   // width: {ideal: 1024},
   // height: {ideal: 576}
@@ -36,6 +38,7 @@ export class NotloadedGenerateBillComponent implements OnInit {
   public deviceId: string;
   private nextWebcam1: Subject<boolean|string> = new Subject<boolean|string>();
   private nextWebcam2: Subject<boolean|string> = new Subject<boolean|string>();
+
   //web cams ends
   constructor(private fb: FormBuilder,public datepipe: DatePipe,private _myservice:AdminserviceService,private billservice: ServerService,private renderer: Renderer2,public dialog: MatDialog) {
       this.emptyvechiclebill = this.fb.group({
@@ -70,8 +73,12 @@ export class NotloadedGenerateBillComponent implements OnInit {
     this.errors.push(error);
   }
 
-  public get triggerObservable(): Observable<void> {
-    return this.trigger.asObservable();
+  public get triggerObservable1(): Observable<void> {
+    return this.trigger1.asObservable();
+  }
+
+  public get triggerObservable2(): Observable<void> {
+    return this.trigger2.asObservable();
   }
 
   public toggleCam(): void {
@@ -94,6 +101,31 @@ export class NotloadedGenerateBillComponent implements OnInit {
     return this.nextWebcam2.asObservable();
   }
 
+  public triggerSnapshot1(): void{
+    this.trigger1.next();
+  }
+
+  public triggerSnapshot2(): void{
+    this.trigger2.next();
+  }
+
+  public handleImage1(webcamImage: WebcamImage): void {
+    console.info('received webcam image', webcamImage);
+    this.webcamImage1 = webcamImage;
+  }
+
+  public handleImage2(webcamImage: WebcamImage): void {
+    console.info('received webcam image', webcamImage);
+    this.webcamImage2 = webcamImage;
+  }
+
+  retake1(){
+    this.webcamImage1 = null;
+  }
+
+  retake2(){
+    this.webcamImage2 = null;
+  }
   //POPUPFUNCTION
   openPopUp(data){
     const dialogRef = this.dialog.open(PrintEmptyBill, {
@@ -114,8 +146,6 @@ export class NotloadedGenerateBillComponent implements OnInit {
   }
 
   submitBill(fData: any,formDirective: FormGroupDirective){
-    // console.log(this.emptyvechiclebill.value);
-    // let d = this.datepipe.transform(new Date(), 'dd/MM/yyyy');
     let tmp = {
       current_date: new Date(),
       vehicle_number: this.emptyvechiclebill.value.vehicleNumber,

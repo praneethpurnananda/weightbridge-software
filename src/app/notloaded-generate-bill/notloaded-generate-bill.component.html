@@ -41,27 +41,53 @@
         <div class="cam camera0">
         </div>
         <div class="cam camera1">
+          <div *ngIf="!webcamImage1;else img1">
           <webcam
           [height]="320"
-          [width]="320" [trigger]="triggerObservable"  *ngIf="showWebcam"
+          [width]="320" [trigger]="triggerObservable1"  *ngIf="showWebcam"
           [allowCameraSwitch]="false" [videoOptions]="videoOptions" [imageQuality]="1" (initError)="handleInitError($event)"
-          [switchCamera]="nextWebcamObservable1"
+          [switchCamera]="nextWebcamObservable1" (imageCapture)="handleImage1($event)"
           >
           </webcam>
-          <div class="btn">
-            <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" type="submit" (click)="showNextWebcam1(true);">Go to next camera</button>
+          </div>
+          <ng-template #img1>
+            <img [src]="webcamImage1.imageAsDataUrl" height="240" width="320">
+          </ng-template>
+          <div class="btn1">
+            <button mat-mini-fab color="primary" class="btn_ic" aria-label="Example icon button with a menu icon" (click)="showNextWebcam1(true);">
+              <mat-icon>queue_play_next</mat-icon>
+            </button>
+            <button mat-mini-fab color="primary" class="btn_ic" aria-label="Example icon button with a menu icon" (click)="triggerSnapshot1();">
+              <mat-icon>filter_center_focus</mat-icon>
+            </button>
+            <button mat-mini-fab color="primary" class="btn_ic" aria-label="Example icon button with a menu icon" (click)="retake1()">
+              <mat-icon>replay</mat-icon>
+            </button>
           </div>
         </div>
         <div class="cam camera2">
+          <div *ngIf="!webcamImage2;else img2">
           <webcam
           [height]="320"
-          [width]="320" [trigger]="triggerObservable"  *ngIf="showWebcam"
+          [width]="320" [trigger]="triggerObservable2"  *ngIf="showWebcam"
           [allowCameraSwitch]="false" [videoOptions]="videoOptions" [imageQuality]="1" (initError)="handleInitError($event)"
-          [switchCamera]="nextWebcamObservable2"
+          [switchCamera]="nextWebcamObservable2" (imageCapture)="handleImage2($event)"
           >
           </webcam>
-          <div class="btn">
-            <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" type="submit" (click)="showNextWebcam2(true);">Go to next camera</button>
+          </div>
+          <ng-template #img2>
+            <img [src]="webcamImage2.imageAsDataUrl" height="240" width="320">
+          </ng-template>
+          <div class="btn1">
+            <button mat-mini-fab color="primary" class="btn_ic" aria-label="Example icon button with a menu icon" (click)="showNextWebcam2(true);">
+              <mat-icon>queue_play_next</mat-icon>
+            </button>
+            <button mat-mini-fab color="primary" class="btn_ic" aria-label="Example icon button with a menu icon" (click)="triggerSnapshot2();">
+              <mat-icon>filter_center_focus</mat-icon>
+            </button>
+            <button mat-mini-fab color="primary" class="btn_ic" aria-label="Example icon button with a menu icon" (click)="retake2()">
+              <mat-icon>replay</mat-icon>
+            </button>
           </div>
         </div>
     </div>

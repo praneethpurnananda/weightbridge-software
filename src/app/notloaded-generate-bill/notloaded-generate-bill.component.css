@@ -54,3 +54,12 @@
   margin-left: 1%;
   margin-bottom: 2%;
 }
+.btn1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn_ic{
+  margin-top: 5%;
+  margin-right: 3%;
+}
