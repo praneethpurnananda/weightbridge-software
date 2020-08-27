@@ -35,27 +35,37 @@
       <mat-label>Empty vehicle weight</mat-label>
       <input matInput id="name" formControlName="weight"  placeholder="Weight">
     </mat-form-field>
-
+    <br>
+    <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" type="submit" id="global" (click)="toggleCam();">On/Off cameras</button>
     <div class="camera">
+        <div class="cam camera0">
+        </div>
         <div class="cam camera1">
-          <video #video1 class="vid" autoplay></video>
-          <div class="cam_btn">
-            <button mat-flat-button color="primary">Capture</button>
+          <webcam
+          [height]="320"
+          [width]="320" [trigger]="triggerObservable"  *ngIf="showWebcam"
+          [allowCameraSwitch]="false" [videoOptions]="videoOptions" [imageQuality]="1" (initError)="handleInitError($event)"
+          [switchCamera]="nextWebcamObservable1"
+          >
+          </webcam>
+          <div class="btn">
+            <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" type="submit" (click)="showNextWebcam1(true);">Go to next camera</button>
           </div>
         </div>
         <div class="cam camera2">
-          <video #video2 class="vid" autoplay></video>
-          <div class="cam_btn">
-            <button mat-flat-button color="primary">Capture</button>
-          </div>
-        </div>
-        <div class="cam camera3">
-          <video #video3 class="vid" autoplay></video>
-          <div class="cam_btn">
-            <button mat-flat-button color="primary">Capture</button>
+          <webcam
+          [height]="320"
+          [width]="320" [trigger]="triggerObservable"  *ngIf="showWebcam"
+          [allowCameraSwitch]="false" [videoOptions]="videoOptions" [imageQuality]="1" (initError)="handleInitError($event)"
+          [switchCamera]="nextWebcamObservable2"
+          >
+          </webcam>
+          <div class="btn">
+            <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" type="submit" (click)="showNextWebcam2(true);">Go to next camera</button>
           </div>
         </div>
     </div>
+
 
     <div class="btn">
     <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" type="submit" [disabled]="!emptyvechiclebill.valid" (click)="submitBill(emptyvechiclebill,formDirective)">Submit bill</button>
@@ -63,5 +73,6 @@
     </div>
   </form>
 </div>
+
 
 </div>

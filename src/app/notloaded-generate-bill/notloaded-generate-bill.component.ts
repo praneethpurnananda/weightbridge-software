@@ -4,35 +4,39 @@ import { DatePipe } from "@angular/common";
 import { AdminserviceService } from "../adminservice.service";
 import { ServerService } from "../server.service";
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-// interface customerType {
-//   value: string;
-//   viewValue: string;
-// }
+import {Subject, Observable} from 'rxjs';
+import {WebcamImage, WebcamInitError, WebcamUtil} from 'ngx-webcam';
+
 @Component({
   selector: 'app-notloaded-generate-bill',
   templateUrl: './notloaded-generate-bill.component.html',
   styleUrls: ['./notloaded-generate-bill.component.css']
 })
 export class NotloadedGenerateBillComponent implements OnInit {
-  @ViewChild('video1', { static: true }) videoElement1: ElementRef;
-  @ViewChild('video2', { static: true }) videoElement2: ElementRef;
-  @ViewChild('video3', {static: true}) videoElement3: ElementRef;
-  videoWidth = 0;
-  videoHeight = 0;
-  constraints = {
-    video: {
-      facingMode: "user",
-      width: {ideal : 302},
-      height: {ideal: 302}
-    }
-  };
+
   public title = "Empty vehicle bill generation";
   emptyvechiclebill: FormGroup;
   ticker = '20';
   currDate;
   allCustomers;
-  // let date: Date = new Date();
-  // console.log(date);
+
+  //web cam
+  public showWebcam = false;
+
+  private trigger: Subject<void> = new Subject<void>();
+
+  public videoOptions: MediaTrackConstraints = {
+  // width: {ideal: 1024},
+  // height: {ideal: 576}
+  };
+
+  public multipleWebcamsAvailable = false;
+  public errors: WebcamInitError[] = [];
+
+  public deviceId: string;
+  private nextWebcam1: Subject<boolean|string> = new Subject<boolean|string>();
+  private nextWebcam2: Subject<boolean|string> = new Subject<boolean|string>();
+  //web cams ends
   constructor(private fb: FormBuilder,public datepipe: DatePipe,private _myservice:AdminserviceService,private billservice: ServerService,private renderer: Renderer2,public dialog: MatDialog) {
       this.emptyvechiclebill = this.fb.group({
         date: [{value: this.datepipe.transform(new Date(), 'dd/MM/yyyy') , disabled: true} , Validators.required],
@@ -44,71 +48,7 @@ export class NotloadedGenerateBillComponent implements OnInit {
   }
 
 
-  //start camera one method
-  startCameraOne(){
-    if (!!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) {
-      console.log(navigator.mediaDevices);
-      console.log(navigator.mediaDevices.getUserMedia);
-      navigator.mediaDevices.getUserMedia(this.constraints).then(this.attachVideoOne.bind(this)).catch(this.handleError);
-    } else {
-      alert('Sorry, camera not available.');
-    }
-  }
-  //start camera two method
-  startCameraTwo(){
-    if (!!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) {
-      console.log(navigator.mediaDevices);
-      console.log(navigator.mediaDevices.getUserMedia);
-      navigator.mediaDevices.getUserMedia(this.constraints).then(this.attachVideoTwo.bind(this)).catch(this.handleError);
-    } else {
-      alert('Sorrt, camera not available.');
-    }
-  }
-  //start camera three method
-  startCameraThree(){
-    if (!!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) {
-      console.log(navigator.mediaDevices);
-      console.log(navigator.mediaDevices.getUserMedia);
-      navigator.mediaDevices.getUserMedia(this.constraints).then(this.attachVideoThree.bind(this)).catch(this.handleError);
-    } else {
-      alert('Sorry, camera not available.');
-    }
-  }
-
-  //if error during starting of camera
-  handleError(error) {
-    console.log('Error: ', error);
-  }
-  attachVideoOne(stream) {
-    this.renderer.setProperty(this.videoElement1.nativeElement, 'srcObject', stream);
-
-    this.renderer.listen(this.videoElement1.nativeElement, 'play', (event) => {
-      this.videoHeight = this.videoElement1.nativeElement.videoHeight;
-      this.videoWidth = this.videoElement1.nativeElement.videoWidth;
-    });
-  }
-  attachVideoTwo(stream) {
-    this.renderer.setProperty(this.videoElement2.nativeElement, 'srcObject', stream);
-
-    this.renderer.listen(this.videoElement2.nativeElement, 'play', (event) => {
-      this.videoHeight = this.videoElement2.nativeElement.videoHeight;
-      this.videoWidth = this.videoElement2.nativeElement.videoWidth;
-    });
-  }
-  attachVideoThree(stream) {
-    this.renderer.setProperty(this.videoElement3.nativeElement, 'srcObject', stream);
-
-    this.renderer.listen(this.videoElement3.nativeElement, 'play', (event) => {
-      this.videoHeight = this.videoElement3.nativeElement.videoHeight;
-      this.videoWidth = this.videoElement3.nativeElement.videoWidth;
-    });
-  }
-
-//nt wg  == loade wt - emt wt , tc = (nwt * itecost) *
   ngOnInit(): void {
-    this.startCameraOne();
-    this.startCameraTwo();
-    this.startCameraThree();
     let date: Date = new Date();
     this.currDate = this.datepipe.transform(date, 'dd/MM/yyyy');
 
@@ -117,8 +57,42 @@ export class NotloadedGenerateBillComponent implements OnInit {
       data => {this.allCustomers = data['customers']},
       error => console.log(error.error.message)
     );
+
+    WebcamUtil.getAvailableVideoInputs()
+      .then((mediaDevices: MediaDeviceInfo[]) => {
+        this.multipleWebcamsAvailable = mediaDevices && mediaDevices.length > 1;
+        console.log(this.multipleWebcamsAvailable);
+      });
   }
 
+
+  public handleInitError(error: WebcamInitError): void {
+    this.errors.push(error);
+  }
+
+  public get triggerObservable(): Observable<void> {
+    return this.trigger.asObservable();
+  }
+
+  public toggleCam(): void {
+    this.showWebcam = !this.showWebcam;
+  }
+
+  public showNextWebcam1(directionOrDeviceId: boolean|string): void {
+    this.nextWebcam1.next(directionOrDeviceId);
+  }
+
+  public showNextWebcam2(directionOrDeviceId: boolean|string): void {
+    this.nextWebcam2.next(directionOrDeviceId);
+  }
+
+  public get nextWebcamObservable1(): Observable<boolean|string> {
+    return this.nextWebcam1.asObservable();
+  }
+
+  public get nextWebcamObservable2(): Observable<boolean|string> {
+    return this.nextWebcam2.asObservable();
+  }
 
   //POPUPFUNCTION
   openPopUp(data){

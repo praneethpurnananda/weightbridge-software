@@ -35,15 +35,22 @@
 }
 .cam{
   background-color: black;
-  height: 40vh;
+  height: 31vh;
   width: 40vh;
+  margin-right: 2%;
 }
 .camera1{
 
 }
 .cam_btn{
+  margin-top: 1%;
+  margin-bottom: 2%;
   text-align: center;
 }
 .print_main{
   text-align: center;
+}
+#global{
+  margin-left: 1%;
+  margin-bottom: 2%;
 }
