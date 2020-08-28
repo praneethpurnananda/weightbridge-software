@@ -20,6 +20,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -77,7 +78,8 @@ import { ViewBillsComponent } from './view-bills/view-bills.component';
     MatDialogModule,
     NgxPrintModule,
     MatBottomSheetModule,
-    WebcamModule
+    WebcamModule,
+    MatSnackBarModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

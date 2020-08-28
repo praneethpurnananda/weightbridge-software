@@ -40,6 +40,7 @@ export class AddcustomertypeComponent implements OnInit {
   }
 
   deleteItem(item){
+    console.log(item._id);
     this._myservice.deleteCustomerType(item._id)
     .subscribe(
       data => {

@@ -46,6 +46,8 @@ export class LoadedGenerateBillComponent implements OnInit {
       data => {this.allDiscounts = data['discounts'],console.log(data)},
       error => console.log(error.error.message)
     );
+
+    this.displayForm = false;
   }
 
   formFunction(item){
@@ -133,7 +135,10 @@ export class LoadedGenerateBillComponent implements OnInit {
 
     this.billservice.finaBill(tmp)
     .subscribe(
-      data => {console.log(data),this.ngOnInit()},
+      data => {
+              console.log(data),
+              this.ngOnInit()
+              },
       error => console.log(error.error.message)
     );
   }
