@@ -13,11 +13,6 @@
     </mat-form-field>
 
     <mat-form-field class="example-full-width-one" appearance="outline">
-      <mat-label>Vehicle number</mat-label>
-      <input matInput id="name" formControlName="vehicleNumber"  placeholder="Vehicle Number" oninput="this.value = this.value.toUpperCase()">
-    </mat-form-field>
-
-    <mat-form-field class="example-full-width-one" appearance="outline">
       <mat-label>Customer name</mat-label>
       <input matInput id="name" formControlName="customerName"  placeholder="Customer Name">
     </mat-form-field>
@@ -29,6 +24,11 @@
           {{type.name}}
         </mat-option>
       </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width-one" appearance="outline">
+      <mat-label>Vehicle number</mat-label>
+      <input matInput id="name" formControlName="vehicleNumber"  placeholder="Vehicle Number" oninput="this.value = this.value.toUpperCase()">
     </mat-form-field>
 
     <mat-form-field class="example-full-width-one" appearance="outline">
@@ -54,7 +54,7 @@
             <img [src]="webcamImage1.imageAsDataUrl" height="240" width="320">
           </ng-template>
           <div class="btn1">
-            <button mat-mini-fab color="primary" class="btn_ic" aria-label="Example icon button with a menu icon" (click)="showNextWebcam1(true);">
+            <button mat-mini-fab color="primary" class="btn_ic" aria-label="Example icon button with a menu icon" [disabled]="!multipleWebcamsAvailable" (click)="showNextWebcam1(true);">
               <mat-icon>queue_play_next</mat-icon>
             </button>
             <button mat-mini-fab color="primary" class="btn_ic" aria-label="Example icon button with a menu icon" (click)="triggerSnapshot1();">
@@ -79,7 +79,7 @@
             <img [src]="webcamImage2.imageAsDataUrl" height="240" width="320">
           </ng-template>
           <div class="btn1">
-            <button mat-mini-fab color="primary" class="btn_ic" aria-label="Example icon button with a menu icon" (click)="showNextWebcam2(true);">
+            <button mat-mini-fab color="primary" class="btn_ic" aria-label="Example icon button with a menu icon" [disabled]="!multipleWebcamsAvailable" (click)="showNextWebcam2(true);">
               <mat-icon>queue_play_next</mat-icon>
             </button>
             <button mat-mini-fab color="primary" class="btn_ic" aria-label="Example icon button with a menu icon" (click)="triggerSnapshot2();">

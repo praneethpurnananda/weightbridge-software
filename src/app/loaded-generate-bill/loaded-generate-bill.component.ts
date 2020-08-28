@@ -3,6 +3,7 @@ import { ServerService } from "../server.service";
 import { AdminserviceService } from "../adminservice.service";
 import {MatTableDataSource} from '@angular/material/table';
 import {FormControl, FormBuilder, FormGroup, NgForm, Validators, FormGroupDirective} from '@angular/forms';
+import { loadedWeightValidation } from "../validations/weightvalidate";
 
 @Component({
   selector: 'app-loaded-generate-bill',
@@ -57,11 +58,12 @@ export class LoadedGenerateBillComponent implements OnInit {
       customerType: [{value: item.customer_type , disabled: true} , Validators.required],
       emptyweight: [{value: item.vehicle_weight , disabled: true} , Validators.required],
       itemname: ['' , Validators.required],
-      weight: ['' , Validators.required],
-      // netweight:[{value: this.finalWeight , disabled: true} , Validators.required],
-      // cost:['' , Validators.required],
+      weight: ['' , [Validators.required, loadedWeightValidation]],
     });
+
   }
+
+
 
   applyFilter(event: Event) {
   const filterValue = (event.target as HTMLInputElement).value;
@@ -135,8 +137,6 @@ export class LoadedGenerateBillComponent implements OnInit {
       error => console.log(error.error.message)
     );
   }
-
-
 
 
 }
