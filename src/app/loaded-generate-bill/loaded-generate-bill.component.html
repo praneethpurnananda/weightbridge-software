@@ -33,6 +33,12 @@
     </ng-container>
 
     <!-- Symbol Column -->
+    <ng-container matColumnDef="Phonenumber">
+      <th mat-header-cell *matHeaderCellDef> Phone number </th>
+      <td mat-cell *matCellDef="let element"> {{element.phone_number}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
     <ng-container matColumnDef="Customrtype">
       <th mat-header-cell *matHeaderCellDef> Customr type </th>
       <td mat-cell *matCellDef="let element"> {{element.customer_type}} </td>

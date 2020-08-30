@@ -18,6 +18,11 @@
     </mat-form-field>
 
     <mat-form-field class="example-full-width-one" appearance="outline">
+      <mat-label>Phone number</mat-label>
+      <input matInput id="number" formControlName="phonenumber"  placeholder="999999999">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width-one" appearance="outline">
       <mat-label>Customer type</mat-label>
       <mat-select formControlName="customerType">
         <mat-option *ngFor="let type of allCustomers" [value]="type.name">

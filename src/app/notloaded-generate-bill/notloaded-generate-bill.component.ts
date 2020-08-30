@@ -46,6 +46,7 @@ export class NotloadedGenerateBillComponent implements OnInit {
         vehicleNumber: ['' , Validators.required],
         customerName: ['' , Validators.required],
         customerType: ['' , Validators.required],
+        phonenumber: ['' , Validators.required],
         weight: ['' , Validators.required]
       });
   }
@@ -110,7 +111,8 @@ export class NotloadedGenerateBillComponent implements OnInit {
   }
 
   public handleImage1(webcamImage: WebcamImage): void {
-    console.info('received webcam image', webcamImage);
+    // console.info('received webcam image', webcamImage);
+    console.log(webcamImage);
     this.webcamImage1 = webcamImage;
   }
 
@@ -151,7 +153,10 @@ export class NotloadedGenerateBillComponent implements OnInit {
       vehicle_number: this.emptyvechiclebill.value.vehicleNumber,
       customer_name: this.emptyvechiclebill.value.customerName,
       customer_type: this.emptyvechiclebill.value.customerType,
-      vehicle_weight: this.emptyvechiclebill.value.weight
+      vehicle_weight: this.emptyvechiclebill.value.weight,
+      phone_number: this.emptyvechiclebill.value.phonenumber,
+      // image1: this.webcamImage1,
+      // image2: this.webcamImage2
     };
     console.log(tmp);
     this.billservice.pendingBill(tmp)

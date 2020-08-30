@@ -14,7 +14,7 @@ export class ViewBillsComponent implements OnInit {
   dataSource;
 
   constructor(private billservice: ServerService) { }
-  displayedColumns = ['Billdate', 'Ticketnumber' , 'Customername' , 'Vehiclenumber' ,'Customertype' , 'Itemtype' , 'Emptyweight' , 'Loadedweight' , 'Netweight' , 'Generatedby' , 'Bill' ] ;
+  displayedColumns = ['Billdate', 'Ticketnumber' , 'Customername' , 'Phonenumber' ,'Vehiclenumber' ,'Customertype' , 'Itemtype' , 'Emptyweight' , 'Loadedweight' , 'Netweight' , 'Generatedby' , 'Bill' ] ;
   ngOnInit(): void {
     this.billservice.getAllBills()
     .subscribe(

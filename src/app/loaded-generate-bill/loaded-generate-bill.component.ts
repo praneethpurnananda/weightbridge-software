@@ -12,7 +12,7 @@ import { loadedWeightValidation } from "../validations/weightvalidate";
 })
 
 export class LoadedGenerateBillComponent implements OnInit {
-  displayedColumns = ['Billdate', 'Ticketnumber', 'Vehiclenumber', 'Customername' , 'Customrtype' , 'Vehicleweight' , 'Createdby' , 'action'];
+  displayedColumns = ['Billdate', 'Ticketnumber', 'Vehiclenumber', 'Customername' , 'Phonenumber' ,'Customrtype' , 'Vehicleweight' , 'Createdby' , 'action'];
   public title = "Loaded vehicle bill generation";
 
   loadedbill: FormGroup;
