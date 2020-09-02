@@ -16,6 +16,13 @@ export class ServerService {
   });
   }
 
+  isAdmin(){
+    return this._http.get(this.backendService+'/users/isAdmin',{
+      observe: 'body',
+      headers: new HttpHeaders().append('token' , localStorage.getItem('token'))
+    });
+  }
+
   pendingBill(body: any){
     return this._http.post(this.backendService+'/bill/emptyBill', body,{
       observe: 'body',

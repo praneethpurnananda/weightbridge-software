@@ -119,13 +119,13 @@
     <div class="generatebtns btn">
 
       <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" type="submit" [disabled]="!loadedbill.valid" (click)="generateWeightAndBill()">Generate weight & bill</button>
-      <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" type="submit" id="global" (click)="toggleCam();">On/Off cameras</button>
 
       <div class="bill-box">
         <h1 *ngIf="finalWeight">Net weight : {{finalWeight}}</h1>
         <h1 *ngIf="totalBill">Total bill : {{totalBill}}</h1>
       </div>
     </div>
+    <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" type="submit" id="global" (click)="toggleCam();">On/Off cameras</button>
       <div class="camera">
           <div class="cam camera1">
             <div *ngIf="!webcamImage1;else img1">

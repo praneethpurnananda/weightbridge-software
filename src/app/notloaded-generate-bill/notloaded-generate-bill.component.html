@@ -15,11 +15,20 @@
     <mat-form-field class="example-full-width-one" appearance="outline">
       <mat-label>Customer name</mat-label>
       <input matInput id="name" formControlName="customerName"  placeholder="Customer Name">
+      <mat-error *ngIf="!emptyvechiclebill.controls.customerName.valid">
+        Enter Valid Customername
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field class="example-full-width-one" appearance="outline">
       <mat-label>Phone number</mat-label>
       <input matInput id="number" formControlName="phonenumber"  placeholder="999999999">
+      <mat-error *ngIf="!emptyvechiclebill.controls.phonenumber.valid && !emptyvechiclebill.controls.phonenumber.hasError('required')">
+        Enter Valid Phone number
+      </mat-error>
+      <mat-error *ngIf="!emptyvechiclebill.controls.phonenumber.valid && emptyvechiclebill.controls.phonenumber.hasError('required')">
+        Phone number is required
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field class="example-full-width-one" appearance="outline">
@@ -29,18 +38,27 @@
           {{type.name}}
         </mat-option>
       </mat-select>
+      <mat-error *ngIf="!emptyvechiclebill.controls.customerType.valid">
+        Customer type is required , if there are no customertypes ask admin to add
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field class="example-full-width-one" appearance="outline">
       <mat-label>Vehicle number</mat-label>
       <input matInput id="name" formControlName="vehicleNumber"  placeholder="Vehicle Number" oninput="this.value = this.value.toUpperCase()">
       <mat-icon matSuffix style="cursor: pointer">publish</mat-icon>
+      <mat-error *ngIf="!emptyvechiclebill.controls.vehicleNumber.valid">
+        Vehicle number is required
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field class="example-full-width-one" appearance="outline">
       <mat-label>Empty vehicle weight</mat-label>
       <input matInput id="name" formControlName="weight"  placeholder="Weight">
       <mat-icon matSuffix style="cursor: pointer">publish</mat-icon>
+      <mat-error *ngIf="!emptyvechiclebill.controls.weight.valid">
+        Enter valid weight
+      </mat-error>
     </mat-form-field>
     <br>
     <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" type="submit" id="global" (click)="toggleCam();">On/Off cameras</button>

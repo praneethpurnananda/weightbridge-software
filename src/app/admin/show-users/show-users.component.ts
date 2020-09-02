@@ -8,7 +8,7 @@ import { AdminserviceService } from "../../adminservice.service";
   styleUrls: ['./show-users.component.css']
 })
 export class ShowUsersComponent implements OnInit {
-  displayedColumns: string[] = ['date', 'name', 'type', 'created_by', 'number'];
+  displayedColumns: string[] = ['date', 'name', 'type', 'created_by', 'number' , 'action'];
   dataSource;
   msg;
 
@@ -22,6 +22,17 @@ export class ShowUsersComponent implements OnInit {
         console.log(this.dataSource);
       },
       error => this.msg = error.error.message
+    );
+  }
+
+  deleteUser(item){
+    this._myservice.deleteUser(item._id)
+    .subscribe(
+      data => {
+        console.log(data);
+        this.ngOnInit();
+      },
+      error => console.log(error.error.message)
     );
   }
 

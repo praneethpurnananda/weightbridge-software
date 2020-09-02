@@ -1,7 +1,17 @@
 <h2 mat-dialog-title>Successfully Billed</h2>
 <mat-dialog-content class="mat-typography">
-  <div class="print_main" id="print_section">
+  <div class="print_main">
       <h2>Ticket Number : {{data.ticket_number}}</h2>
+  </div>
+  <div id="print_section" style="display: none">
+      {{data.bill_by}} <br>
+      {{data.bill_date}} <br>
+      {{data.customer_name}} <br>
+      {{data.customer_type}} <br>
+      <img [src]="data.images.empty_image1._imageAsDataUrl" height="240" width="320"> <br>
+      <img [src]="data.images.empty_image2._imageAsDataUrl" height="240" width="320"> <br>
+      {{data.ticket_number}} <br>
+      {{data.vehicle_number}}
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">

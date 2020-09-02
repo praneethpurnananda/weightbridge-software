@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Successfully Billed</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="print_main">
+      <h2>{{data.name}}</h2>
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" type="button" printSectionId="print_section" ngxPrint>Print Bill</button>
+  <button mat-flat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

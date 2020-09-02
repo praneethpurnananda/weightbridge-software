@@ -47,8 +47,8 @@ export class NotloadedGenerateBillComponent implements OnInit {
         vehicleNumber: ['' , Validators.required],
         customerName: ['' , Validators.required],
         customerType: ['' , Validators.required],
-        phonenumber: ['' , Validators.required],
-        weight: ['' , Validators.required]
+        phonenumber: ['' , [Validators.required , Validators.pattern('^[0-9]+$') , Validators.minLength(5) , Validators.maxLength(10)]],
+        weight: ['' , [Validators.required , Validators.pattern('^[0-9]+$')]]
       });
   }
 
@@ -141,7 +141,8 @@ export class NotloadedGenerateBillComponent implements OnInit {
           customer_type: data.customer_type,
           ticket_number: data.ticket_number,
           vehicle_number: data.vehicle_number,
-          vehicle_weight: data.vehicle_weight
+          vehicle_weight: data.vehicle_weight,
+          images: data.images,
           },
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -170,6 +171,7 @@ export class NotloadedGenerateBillComponent implements OnInit {
             this.emptyvechiclebill.reset({
               date:  this.datepipe.transform(new Date(), 'dd/MM/yyyy')
             });
+            console.log(data['doc']);
             this.openPopUp(data['doc']);
             this.webcamImage1 = null;
             this.webcamImage2 = null;

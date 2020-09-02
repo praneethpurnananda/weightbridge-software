@@ -230,11 +230,57 @@ export class LoadedGenerateBillComponent implements OnInit {
     .subscribe(
       data => {
               console.log(data),
+              console.log(data['doc']);
+              this.openPopUp(data['doc']);
+              this.webcamImage1 = null;
+              this.webcamImage2 = null;
               this.ngOnInit()
               },
       error => console.log(error.error.message)
     );
   }
 
+  //POPUPFUNCTION
+  openPopUp(data){
+    const dialogRef = this.dialog.open(PrintBill, {
+      width:'900px',
+      data: {
+          // bill_by: data.created_by,
+          // bill_date: data.current_date,
+          // customer_name: data.customer_name,
+          // customer_type: data.customer_type,
+          // ticket_number: data.ticket_number,
+          // vehicle_number: data.vehicle_number,
+          // vehicle_weight: data.vehicle_weight
+          name: 'Successfully Billed'
+          },
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+
+}
+
+
+//model box typescript file starts
+
+@Component({
+  selector: 'printbill',
+  templateUrl: 'printbill.html',
+  styleUrls: ['./loaded-generate-bill.component.css']
+})
+export class PrintBill {
+
+  constructor(
+    public dialogRef: MatDialogRef<PrintBill>,
+    @Inject(MAT_DIALOG_DATA) public data) {
+      console.log(data);
+    }
+    onNoClick(): void {
+    this.dialogRef.close();
+  }
+  printTitle = 'demo';
 
 }

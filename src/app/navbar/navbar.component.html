@@ -7,8 +7,10 @@
     </mat-menu>
   </span>
   <span class="sub_menu" routerLink="/viewBills">View bills</span>
-  <span class="sub_menu" routerLink="/item">Items</span>
-  <span class="sub_menu" routerLink="/customertype">Add discounts</span>
-  <span class="sub_menu" routerLink="/addcustomertype">Add customertype</span>
-  <span class="sub_menu" routerLink="/addUser">Add users</span>
+
+  <span class="sub_menu" routerLink="/item" *ngIf="this.isAdmin">Items</span>
+  <span class="sub_menu" routerLink="/customertype" *ngIf="this.isAdmin">Add discounts</span>
+  <span class="sub_menu" routerLink="/addcustomertype" *ngIf="this.isAdmin">Add customertype</span>
+  <span class="sub_menu" routerLink="/addUser" *ngIf="this.isAdmin">Add users</span>
+
 </mat-toolbar>

@@ -24,6 +24,15 @@ export class AdminserviceService {
   });
   }
 
+  deleteUser(tmp){
+    return this._http.delete(this.backendService+'/users/deleteUser',{
+      observe: 'body',
+      headers: new HttpHeaders().append('token' , localStorage.getItem('token')),
+      params: new HttpParams().append('id' , tmp)
+    });
+  }
+
+
   addItem(body: any){
   return this._http.post(this.backendService+'/item/addItem', body,{
     observe: 'body',
