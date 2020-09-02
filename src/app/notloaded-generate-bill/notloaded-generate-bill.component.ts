@@ -157,8 +157,8 @@ export class NotloadedGenerateBillComponent implements OnInit {
       customer_type: this.emptyvechiclebill.value.customerType,
       vehicle_weight: this.emptyvechiclebill.value.weight,
       phone_number: this.emptyvechiclebill.value.phonenumber,
-      // image1: this.webcamImage1,
-      // image2: this.webcamImage2
+      image1: this.webcamImage1,
+      image2: this.webcamImage2
     };
     console.log(tmp);
     this.billservice.pendingBill(tmp)
