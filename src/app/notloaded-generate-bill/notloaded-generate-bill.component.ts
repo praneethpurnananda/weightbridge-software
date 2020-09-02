@@ -6,6 +6,7 @@ import { ServerService } from "../server.service";
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {Subject, Observable} from 'rxjs';
 import {WebcamImage, WebcamInitError, WebcamUtil} from 'ngx-webcam';
+import * as SerialPort from 'serialport';
 
 @Component({
   selector: 'app-notloaded-generate-bill',
@@ -13,7 +14,7 @@ import {WebcamImage, WebcamInitError, WebcamUtil} from 'ngx-webcam';
   styleUrls: ['./notloaded-generate-bill.component.css']
 })
 export class NotloadedGenerateBillComponent implements OnInit {
-
+  serialPort: typeof SerialPort;
   public title = "Empty vehicle bill generation";
   emptyvechiclebill: FormGroup;
   ticker = '20';
@@ -67,6 +68,7 @@ export class NotloadedGenerateBillComponent implements OnInit {
         this.multipleWebcamsAvailable = mediaDevices && mediaDevices.length > 1;
         console.log(this.multipleWebcamsAvailable);
       });
+
   }
 
 
