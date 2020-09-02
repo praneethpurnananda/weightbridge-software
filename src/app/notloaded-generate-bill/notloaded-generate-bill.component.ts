@@ -171,6 +171,8 @@ export class NotloadedGenerateBillComponent implements OnInit {
               date:  this.datepipe.transform(new Date(), 'dd/MM/yyyy')
             });
             this.openPopUp(data['doc']);
+            this.webcamImage1 = null;
+            this.webcamImage2 = null;
             },
       error => console.log(error.error.message)
     );

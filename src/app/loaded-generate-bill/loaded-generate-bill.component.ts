@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , ElementRef , Renderer2 , ViewChild , Inject} from '@angular/core';
 import { ServerService } from "../server.service";
 import { AdminserviceService } from "../adminservice.service";
 import {MatTableDataSource} from '@angular/material/table';
 import {FormControl, FormBuilder, FormGroup, NgForm, Validators, FormGroupDirective} from '@angular/forms';
 import { loadedWeightValidation } from "../validations/weightvalidate";
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {Subject, Observable} from 'rxjs';
+import {WebcamImage, WebcamInitError, WebcamUtil} from 'ngx-webcam';
 
 @Component({
   selector: 'app-loaded-generate-bill',
@@ -25,7 +28,30 @@ export class LoadedGenerateBillComponent implements OnInit {
   finalWeight;
   allDiscounts;
   totalBill;
-  constructor(private billservice: ServerService,private fb: FormBuilder,private _myservice: AdminserviceService) { }
+
+  //web cam
+  public showWebcam = false;
+
+  public webcamImage1: WebcamImage = null;
+  public webcamImage2: WebcamImage = null;
+  private trigger1: Subject<void> = new Subject<void>();
+  private trigger2: Subject<void> = new Subject<void>();
+  public videoOptions: MediaTrackConstraints = {
+  // width: {ideal: 1024},
+  // height: {ideal: 576}
+  };
+
+  public multipleWebcamsAvailable = false;
+  public errors: WebcamInitError[] = [];
+
+  public deviceId: string;
+  private nextWebcam1: Subject<boolean|string> = new Subject<boolean|string>();
+  private nextWebcam2: Subject<boolean|string> = new Subject<boolean|string>();
+
+  //web cams ends
+
+
+  constructor(private billservice: ServerService,private fb: FormBuilder,private _myservice: AdminserviceService,private renderer: Renderer2,public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.billservice.getPendingBills()
@@ -47,7 +73,72 @@ export class LoadedGenerateBillComponent implements OnInit {
       error => console.log(error.error.message)
     );
 
+    WebcamUtil.getAvailableVideoInputs()
+      .then((mediaDevices: MediaDeviceInfo[]) => {
+        this.multipleWebcamsAvailable = mediaDevices && mediaDevices.length > 1;
+        console.log(this.multipleWebcamsAvailable);
+      });
+
     this.displayForm = false;
+  }
+
+  public handleInitError(error: WebcamInitError): void {
+    this.errors.push(error);
+  }
+
+  public get triggerObservable1(): Observable<void> {
+    return this.trigger1.asObservable();
+  }
+
+  public get triggerObservable2(): Observable<void> {
+    return this.trigger2.asObservable();
+  }
+
+  public toggleCam(): void {
+    this.showWebcam = !this.showWebcam;
+  }
+
+  public showNextWebcam1(directionOrDeviceId: boolean|string): void {
+    this.nextWebcam1.next(directionOrDeviceId);
+  }
+
+  public showNextWebcam2(directionOrDeviceId: boolean|string): void {
+    this.nextWebcam2.next(directionOrDeviceId);
+  }
+
+  public get nextWebcamObservable1(): Observable<boolean|string> {
+    return this.nextWebcam1.asObservable();
+  }
+
+  public get nextWebcamObservable2(): Observable<boolean|string> {
+    return this.nextWebcam2.asObservable();
+  }
+
+  public triggerSnapshot1(): void{
+    this.trigger1.next();
+  }
+
+  public triggerSnapshot2(): void{
+    this.trigger2.next();
+  }
+
+  public handleImage1(webcamImage: WebcamImage): void {
+    // console.info('received webcam image', webcamImage);
+    console.log(webcamImage);
+    this.webcamImage1 = webcamImage;
+  }
+
+  public handleImage2(webcamImage: WebcamImage): void {
+    console.info('received webcam image', webcamImage);
+    this.webcamImage2 = webcamImage;
+  }
+
+  retake1(){
+    this.webcamImage1 = null;
+  }
+
+  retake2(){
+    this.webcamImage2 = null;
   }
 
   formFunction(item){
@@ -128,7 +219,9 @@ export class LoadedGenerateBillComponent implements OnInit {
             loaded_weight: this.loadedbill.value.weight,
             net_weight: this.finalWeight,
             item:  this.loadedbill.value.itemname,
-            amount: this.totalBill
+            amount: this.totalBill,
+            image1: this.webcamImage1,
+            image2: this.webcamImage2
           };
     console.log(tmp);
     // console.log(this.loadedbill.getRawValue());
