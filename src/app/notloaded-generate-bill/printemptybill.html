@@ -1,20 +1,138 @@
 <h2 mat-dialog-title>Successfully Billed</h2>
 <mat-dialog-content class="mat-typography">
   <div class="print_main">
-      <h2>Ticket Number : {{data.ticket_number}}</h2>
+    <h2>Ticket Number : {{data.ticket_number}}</h2>
   </div>
   <div id="print_section" style="display: none">
-      {{data.bill_by}} <br>
-      {{data.bill_date}} <br>
-      {{data.customer_name}} <br>
-      {{data.customer_type}} <br>
-      <img [src]="data.images.empty_image1._imageAsDataUrl" height="240" width="320"> <br>
-      <img [src]="data.images.empty_image2._imageAsDataUrl" height="240" width="320"> <br>
-      {{data.ticket_number}} <br>
-      {{data.vehicle_number}}
+
+    <!--printing bill-->
+    <body>
+    <!-- partial:index.partial.html -->
+    <div class="container">
+      <div class="invoice">
+        <div class="row">
+          <div class="col-7">
+            <img src="../../assets/images/90Tech.png" class="logo">
+          </div>
+          <div class="col-5">
+            <h1 class="document-type display-4">Invoice</h1>
+            <p class="text-right"><strong>22/08/2020</strong></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-7">
+            <p>
+              <strong>Trunck Scale Name</strong><br>
+              6B Rue Aux-Saussaies-Des-Dames<br>
+              57950 MONTIGNY-LES-METZ
+            </p>
+          </div>
+          <div class="col-5">
+            <br><br><br>
+            <p>
+              <strong>Bill To Name</strong><br>
+              Réf. Client <em>C00022</em><br>
+              12 Rue de Verdun<br>
+              54250 JARNY
+            </p>
+          </div>
+        </div>
+        <br>
+        <br>
+        <h6>Some Heading Regarding the invoice , a short Description </h6>
+        <br>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Quantity</th>
+              <th>Description</th>
+              <th>Unit Price</th>
+              <th>Amount</th>
+              <!-- <th>TVA</th>
+              <th>Total HT</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Front and Rear cables</td>
+              <td>Jour</td>
+              <td class="text-right">100.00</td>
+              <td>100.00</td>
+              <!-- <td class="text-right">500,00€</td> -->
+            </tr>
+          </tbody>
+        </table>
+        <div class="row">
+          <div class="col-8">
+          </div>
+          <div class="col-4">
+            <table class="table table-sm text-right">
+              <tr>
+                <td><strong>Subtotal</strong></td>
+                <td class="text-right">145.00</td>
+              </tr>
+              <tr>
+                <td>Sales Tax 6.25%</td>
+                <td class="text-right">9.06</td>
+              </tr>
+              <tr>
+                <td><strong>Total</strong></td>
+                <td class="text-right">154.06 /-</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <p class="conditions">
+          In your kind payment
+          <br>
+          And with our thanks.
+          <br><br>
+          Payment terms: payment on receipt of invoice, within 15 days.
+          <br>
+          No discount granted for early payment.
+          <br>
+          Payment by bank transfer.
+          <br><br>
+          In the event of late payment, lump sum compensation for recovery costs: 40 euros (art. L.4413 and L.4416 of the Commercial Code).
+        </p>
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <p class="bottom-page text-right">
+          90TECH SAS - N° SIRET 80897753200015 RCS METZ<br>
+          6B, Rue aux Saussaies des Dames - 57950 MONTIGNY-LES-METZ 03 55 80 42 62 - www.90tech.fr<br>
+          Code APE 6201Z - N° TVA Intracom. FR 77 808977532<br>
+          IBAN FR76 1470 7034 0031 4211 7882 825 - SWIFT CCBPFRPPMTZ
+        </p>
+      </div>
+    </div>
+    <!-- partial -->
+
+    </body>
+    <!--printing bill-->
+
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" type="button" printSectionId="print_section" ngxPrint>Print Bill</button>
+  <button mat-raised-button color="primary" class="mat-raised-button mat-primary submit" type="button" styleSheetFile="./assets/print.css,./assets/bootstrap.css" printSectionId="print_section"  ngxPrint>
+    Print Bill
+  </button>
   <button mat-flat-button mat-dialog-close>Close</button>
 </mat-dialog-actions>
+
+
+<!--
+<h1>{{data.bill_by}}</h1> <br>
+{{data.bill_date}} <br>
+{{data.customer_name}} <br>
+{{data.customer_type}} <br>
+<img [src]="data.images.empty_image1._imageAsDataUrl" height="240" width="320"> <br>
+<img [src]="data.images.empty_image2._imageAsDataUrl" height="240" width="320"> <br>
+{{data.ticket_number}} <br>
+{{data.vehicle_number}}
+  -->
