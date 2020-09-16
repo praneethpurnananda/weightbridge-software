@@ -7,6 +7,8 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import {Subject, Observable} from 'rxjs';
 import {WebcamImage, WebcamInitError, WebcamUtil} from 'ngx-webcam';
 import * as SerialPort from 'serialport';
+import { createWorker } from 'tesseract.js';
+
 
 @Component({
   selector: 'app-notloaded-generate-bill',
@@ -20,7 +22,8 @@ export class NotloadedGenerateBillComponent implements OnInit {
   ticker = '20';
   currDate;
   allCustomers;
-
+  ocrResult;
+  imgUrl;
   //web cam
   public showWebcam = false;
 
@@ -69,6 +72,27 @@ export class NotloadedGenerateBillComponent implements OnInit {
         console.log(this.multipleWebcamsAvailable);
       });
 
+  }
+
+
+  recognize(){
+    this.doOCR();
+  }
+  //recognising img
+  async doOCR() {
+    // this.imgUrl = 'data:image/jpeg;base64,' + this.webcamImage1.imageAsBase64String;
+
+    const worker = createWorker({
+      logger: m => console.log(m),
+    });
+    await worker.load();
+    await worker.loadLanguage('eng');
+    await worker.initialize('eng');
+    const { data: { text } } = await worker.recognize('this.webcamImage1');
+    this.ocrResult = text;
+    console.log(text);
+    await worker.terminate();
+    console.log(this.ocrResult);
   }
 
 
