@@ -114,6 +114,12 @@ margin-top: 15%;
   width: 100% !important;
 }
 
+.msg{
+  text-align: center;
+  color: #c12122;
+  margin-top: 1%;
+}
+
 
 @media (max-width:767px) {
   body{

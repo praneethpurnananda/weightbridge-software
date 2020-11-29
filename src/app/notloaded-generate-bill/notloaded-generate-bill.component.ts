@@ -10,6 +10,7 @@ import * as SerialPort from 'serialport';
 import { createWorker } from 'tesseract.js';
 
 
+
 @Component({
   selector: 'app-notloaded-generate-bill',
   templateUrl: './notloaded-generate-bill.component.html',
@@ -71,28 +72,20 @@ export class NotloadedGenerateBillComponent implements OnInit {
         this.multipleWebcamsAvailable = mediaDevices && mediaDevices.length > 1;
         console.log(this.multipleWebcamsAvailable);
       });
-
   }
 
-
-  recognize(){
-    this.doOCR();
-  }
   //recognising img
   async doOCR() {
-    // this.imgUrl = 'data:image/jpeg;base64,' + this.webcamImage1.imageAsBase64String;
-
     const worker = createWorker({
       logger: m => console.log(m),
     });
     await worker.load();
     await worker.loadLanguage('eng');
     await worker.initialize('eng');
-    const { data: { text } } = await worker.recognize('this.webcamImage1');
+    const { data: { text } } = await worker.recognize('../../assets/images/demo.jpg'); //this.webcamImage1.imageAsDataUrl
     this.ocrResult = text;
     console.log(text);
     await worker.terminate();
-    console.log(this.ocrResult);
   }
 
 
@@ -140,6 +133,11 @@ export class NotloadedGenerateBillComponent implements OnInit {
     // console.info('received webcam image', webcamImage);
     console.log(webcamImage);
     this.webcamImage1 = webcamImage;
+    var imageBase64 = this.webcamImage1.imageAsDataUrl;
+    var blob = new Blob([imageBase64], {type: 'image/png'});
+    var file = new File([blob], 'imageFileName.png');
+    console.log(file);
+    this.doOCR();
   }
 
   public handleImage2(webcamImage: WebcamImage): void {
@@ -166,6 +164,7 @@ export class NotloadedGenerateBillComponent implements OnInit {
           ticket_number: data.ticket_number,
           vehicle_number: data.vehicle_number,
           vehicle_weight: data.vehicle_weight,
+          phone_number: data.phone_number,
           images: data.images,
           },
     });

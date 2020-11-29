@@ -46,7 +46,7 @@
     <mat-form-field class="example-full-width-one" appearance="outline">
       <mat-label>Vehicle number</mat-label>
       <input matInput id="name" formControlName="vehicleNumber"  placeholder="Vehicle Number" oninput="this.value = this.value.toUpperCase()">
-      <mat-icon matSuffix style="cursor: pointer" (click)="recognize()">publish</mat-icon>
+      <mat-icon matSuffix style="cursor: pointer">publish</mat-icon>
       <mat-error *ngIf="!emptyvechiclebill.controls.vehicleNumber.valid">
         Vehicle number is required
       </mat-error>

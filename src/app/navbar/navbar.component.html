@@ -12,5 +12,6 @@
   <span class="sub_menu" routerLink="/customertype" *ngIf="this.isAdmin">Add discounts</span>
   <span class="sub_menu" routerLink="/addcustomertype" *ngIf="this.isAdmin">Add customertype</span>
   <span class="sub_menu" routerLink="/addUser" *ngIf="this.isAdmin">Add users</span>
-
+  <span class="example-spacer"></span>
+  <button mat-raised-button color="primary" (click)="logout()">Logout</button>
 </mat-toolbar>

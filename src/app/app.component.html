@@ -1,1 +1,4 @@
-<router-outlet></router-outlet>
+<router-outlet *ngIf="status; else offline"></router-outlet>
+<ng-template #offline>
+<h1>OFFLINE</h1>
+</ng-template>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerService } from "../server.service";
+import { Router } from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +10,7 @@ import { ServerService } from "../server.service";
 })
 export class NavbarComponent implements OnInit {
   isAdmin:boolean = false;
-  constructor(private _myservice:ServerService) { }
+  constructor(private _myservice:ServerService,private router: Router,private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this._myservice.isAdmin()
@@ -19,6 +21,18 @@ export class NavbarComponent implements OnInit {
       },
       error => console.log(error.error.message)
     );
+  }
+
+  logout(){
+    localStorage.removeItem('token');
+    this.router.navigate(['']);
+    this.openSnackBar();
+  }
+
+  openSnackBar() {
+    this._snackBar.open('Successfully Logged Out', 'Close', {
+      duration: 2000,
+    });
   }
 
 }

@@ -31,39 +31,37 @@
             <br><br><br>
             <p>
               <strong>Bill To Name</strong><br>
-              Réf. Client <em>C00022</em><br>
-              12 Rue de Verdun<br>
-              54250 JARNY
+            {{data.customer_name}}<br>
+            {{data.phone_number}}<br>
+            {{data.vehicle_number}}
             </p>
           </div>
         </div>
         <br>
         <br>
-        <h6>Some Heading Regarding the invoice , a short Description </h6>
+        <h6>Empty Vehicle Bill Generation Reciept - ticket number <b><em>{{data.ticket_number}}</em></b></h6>
         <br>
         <table class="table table-striped">
           <thead>
             <tr>
-              <th>Quantity</th>
-              <th>Description</th>
-              <th>Unit Price</th>
-              <th>Amount</th>
-              <!-- <th>TVA</th>
-              <th>Total HT</th> -->
+              <th>Name</th>
+              <th>Vehicle Number</th>
+              <th>Phone Number</th>
+              <th>Date</th>
+              <th>Empty Vehicle Weight</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>1</td>
-              <td>Front and Rear cables</td>
-              <td>Jour</td>
-              <td class="text-right">100.00</td>
-              <td>100.00</td>
-              <!-- <td class="text-right">500,00€</td> -->
+              <td>{{data.customer_name}}</td>
+              <td>{{data.vehicle_number}}</td>
+              <td>{{data.phone_number}}</td>
+              <td class="text-right">{{data.bill_date | date: "dd/mm/yyyy" }}</td>
+              <td>{{data.vehicle_weight}}</td>
             </tr>
           </tbody>
         </table>
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-8">
           </div>
           <div class="col-4">
@@ -82,7 +80,7 @@
               </tr>
             </table>
           </div>
-        </div>
+        </div> -->
 
         <p class="conditions">
           In your kind payment
